@@ -7,6 +7,32 @@ import formRoutes from "./modules/forms/forms.route";
 import { userSchemas } from "./modules/user/user.schema";
 import { formSchemas } from "./modules/forms/forms.schema";
 import { version } from "../package.json";
+const swaggerOptions = {
+  swagger: {
+    info: {
+      title: "Form App API",
+      description: "API for Form APP",
+      version: version,
+    },
+    host: "localhost",
+    schemes: ["http", "https"],
+    consumes: ["application/json"],
+    produces: ["application/json"],
+    tags: [{ name: "Default", description: "Default" }],
+  },
+};
+const swaggerUiOptions = {
+  routePrefix: "/docs",
+  exposeRoute: true,
+  staticCSP: true,
+  openapi: {
+    info: {
+      title: "Form App API",
+      description: "API for Form APP",
+      version: version,
+    },
+  },
+};
 
 export const server = Fastify();
 
@@ -46,7 +72,10 @@ async function main() {
     console.log(schema);
   }
 
+  server.register(swagger, swaggerOptions);
+  server.register(swaggerUi, swaggerUiOptions);
   server.register(userRoutes, { prefix: "api/users" });
+  server.register(formRoutes, { prefix: "api/forms" });
   try {
     await server.listen({ port: 3000, host: "0.0.0.0" });
     console.log("server ready at http://localhost:3000");
