@@ -18,6 +18,7 @@ async function formRoutes(server: FastifyInstance) {
   server.get(
     "/",
     {
+      preHandler: [server.authenticate],
       schema: {
         response: {
           200: $ref("formsResponseSchema"),

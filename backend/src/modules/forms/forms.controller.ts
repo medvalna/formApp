@@ -1,4 +1,4 @@
-﻿import { FastifyReply, FastifyRequest } from "fastify";
+﻿import { FastifyRequest } from "fastify";
 import { createForm, getForms } from "./forms.service";
 import { CreateFormInput } from "./forms.schema";
 
@@ -12,10 +12,13 @@ export async function createFormHandler(
   return form;
 }
 
-export async function getFormsHandler(
-  request: FastifyRequest,
-  reply: FastifyReply
-) {
-  const forms = await getForms();
+export async function getFormsHandler(request: FastifyRequest) {
+  console.log(request.user.userId);
+  const forms = await getForms({ creatorId: request.user.userId });
   return forms;
 }
+
+// export async function updateFormsHandler() {
+//   const forms = await getForms();
+//   return forms;
+// }

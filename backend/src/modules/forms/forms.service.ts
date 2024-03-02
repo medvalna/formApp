@@ -9,8 +9,11 @@ export async function createForm(
   });
 }
 
-export async function getForms() {
+export async function getForms(data: { creatorId: string }) {
   return prisma.form.findMany({
+    where: {
+      creatorId: data.creatorId,
+    },
     select: {
       title: true,
       isAnonymous: true,
