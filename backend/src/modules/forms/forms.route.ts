@@ -1,5 +1,9 @@
 ﻿import { FastifyInstance } from "fastify";
-import { createFormHandler, getFormsHandler } from "./forms.controller";
+import {
+  createFormHandler,
+  getFormsHandler,
+  updateFormsHandler,
+} from "./forms.controller";
 import { $ref } from "./forms.schema";
 async function formRoutes(server: FastifyInstance) {
   server.post(
@@ -26,6 +30,19 @@ async function formRoutes(server: FastifyInstance) {
       },
     },
     getFormsHandler
+  );
+  server.patch(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("updateFormSchema"),
+        response: {
+          201: $ref("updateFormResponseSchema"),
+        },
+      },
+    },
+    updateFormsHandler
   );
 }
 export default formRoutes;
