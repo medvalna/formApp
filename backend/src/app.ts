@@ -7,6 +7,10 @@ import formRoutes from "./modules/forms/forms.route";
 import { userSchemas } from "./modules/user/user.schema";
 import { formSchemas } from "./modules/forms/forms.schema";
 import { version } from "../package.json";
+import questionRoutes from "./modules/question/question.route";
+import { questionSchemas } from "./modules/question/question.schema";
+import { optionSchemas } from "./modules/options/options.schema";
+import optionRoutes from "./modules/options/options.route";
 const swaggerOptions = {
   swagger: {
     info: {
@@ -67,7 +71,11 @@ server.get("/check", async function () {
 });
 
 async function main() {
-  for (const schema of [...userSchemas, ...formSchemas]) {
+  for (const schema of [
+    ...userSchemas,
+    ...formSchemas,
+    ...questionSchemas,
+  ]) {
     server.addSchema(schema);
     console.log(schema);
   }
@@ -76,6 +84,7 @@ async function main() {
   server.register(swaggerUi, swaggerUiOptions);
   server.register(userRoutes, { prefix: "api/users" });
   server.register(formRoutes, { prefix: "api/forms" });
+  server.register(questionRoutes, { prefix: "api/questions" });
   try {
     await server.listen({ port: 3000, host: "0.0.0.0" });
     console.log("server ready at http://localhost:3000");
