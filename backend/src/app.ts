@@ -75,6 +75,7 @@ async function main() {
     ...userSchemas,
     ...formSchemas,
     ...questionSchemas,
+    ...optionSchemas,
   ]) {
     server.addSchema(schema);
     console.log(schema);
@@ -85,6 +86,7 @@ async function main() {
   server.register(userRoutes, { prefix: "api/users" });
   server.register(formRoutes, { prefix: "api/forms" });
   server.register(questionRoutes, { prefix: "api/questions" });
+  server.register(optionRoutes, { prefix: "api/options" });
   try {
     await server.listen({ port: 3000, host: "0.0.0.0" });
     console.log("server ready at http://localhost:3000");
