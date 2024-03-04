@@ -41,6 +41,7 @@ isRequired Boolean
 options Options[]
 relatedForm Form @relation(fields: [relatedFormId], references: formId)
 relatedFormId String
+relatedChoice Choice[]
 }
 
 enum Type {
@@ -54,6 +55,7 @@ optionId String @id @default(uuid())
 text String
 relatedQuestion Questions @relation(fields: [relatedQuestionId], references: [questionId])
 relatedQuestionId String
+relatedChoice Choice[]
 }
 
 model Answer {
@@ -62,5 +64,15 @@ model Answer {
     responder Users? @relation(fields: [responderId], references: [userId])
     relatedFormId String
     form Form @relation(fields: [relatedFormId], references: [formId])
+    choices Choice[]
 }
 
+model Choice {
+    choiceId String @id @default(uuid())
+    relatedAnswer Answer @relation(fields: [relatedAnswerId], references: [answerId])
+    relatedAnswerId String
+    relatedQuestion Questions @relation(fields: [relatedQuestionId], references: [questionId])
+    relatedQuestionId String
+    relatedOption Options @relation(fields: [relatedOptionId], references: [optionId])
+    relatedOptionId String
+}
