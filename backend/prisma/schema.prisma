@@ -19,6 +19,7 @@ email String @unique
 password String
 forms Form[]
 salt String
+answers Answer[]
 }
 
 model Form {
@@ -29,6 +30,7 @@ creator Users @relation(fields: [creatorId], references: [userId])
 creatorId String
 isPublished Boolean
 questions Questions[]
+answers Answer[]
 }
 
 model Questions {
@@ -53,3 +55,12 @@ text String
 relatedQuestion Questions @relation(fields: [relatedQuestionId], references: [questionId])
 relatedQuestionId String
 }
+
+model Answer {
+    answerId String @id @default(uuid())
+    responderId String?
+    responder Users? @relation(fields: [responderId], references: [userId])
+    relatedFormId String
+    form Form @relation(fields: [relatedFormId], references: [formId])
+}
+
