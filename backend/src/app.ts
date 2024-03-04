@@ -13,6 +13,8 @@ import { optionSchemas } from "./modules/options/options.schema";
 import optionRoutes from "./modules/options/options.route";
 import answerRoutes from "./modules/answers/answers.route";
 import { answerSchemas } from "./modules/answers/answers.schema";
+import { choiceSchemas } from "./modules/choice/choice.schema";
+import choiceRoutes from "./modules/choice/choice.router";
 const swaggerOptions = {
   swagger: {
     info: {
@@ -79,6 +81,7 @@ async function main() {
     ...questionSchemas,
     ...optionSchemas,
     ...answerSchemas,
+    ...choiceSchemas,
   ]) {
     server.addSchema(schema);
     console.log(schema);
@@ -91,6 +94,7 @@ async function main() {
   server.register(questionRoutes, { prefix: "api/questions" });
   server.register(optionRoutes, { prefix: "api/options" });
   server.register(answerRoutes, { prefix: "api/answers" });
+  server.register(choiceRoutes, { prefix: "api/choice" });
   try {
     await server.listen({ port: 3000, host: "0.0.0.0" });
     console.log("server ready at http://localhost:3000");

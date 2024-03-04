@@ -73,6 +73,7 @@ model Choice {
     relatedAnswerId String
     relatedQuestion Questions @relation(fields: [relatedQuestionId], references: [questionId])
     relatedQuestionId String
-    relatedOption Options @relation(fields: [relatedOptionId], references: [optionId])
-    relatedOptionId String
+    relatedOption Options? @relation(fields: [relatedOptionId], references: [optionId])
+    relatedOptionId String?
+    input String?
 }
