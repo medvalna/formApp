@@ -29,10 +29,17 @@ const updateFormResponseSchema = z.object({
   isAnonymous: z.boolean(),
   isPublished: z.boolean(),
 });
+const deleteFormSchema = z.object({
+  ...formGenerated,
+});
+const deleteFormResponseSchema = z.object({
+  ...formGenerated,
+});
 const formsResponseSchema = z.array(formResponseSchema);
 
 export type CreateFormInput = z.infer<typeof createFormSchema>;
 export type UpdateFormInput = z.infer<typeof updateFormSchema>;
+export type DeleteFormInput = z.infer<typeof deleteFormSchema>;
 
 export const { schemas: formSchemas, $ref } = buildJsonSchemas(
   {
@@ -41,6 +48,8 @@ export const { schemas: formSchemas, $ref } = buildJsonSchemas(
     formsResponseSchema,
     updateFormSchema,
     updateFormResponseSchema,
+    deleteFormSchema,
+    deleteFormResponseSchema,
   },
   { $id: "formSchema" }
 );

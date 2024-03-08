@@ -1,5 +1,9 @@
 ﻿import prisma from "../../utils/prisma";
-import { CreateFormInput, UpdateFormInput } from "./forms.schema";
+import {
+  CreateFormInput,
+  DeleteFormInput,
+  UpdateFormInput,
+} from "./forms.schema";
 
 export async function createForm(
   data: CreateFormInput & { creatorId: string }
@@ -38,5 +42,16 @@ export async function updateForm(
       creatorId: data.creatorId,
     },
     data,
+  });
+}
+
+export async function deleteForm(
+  data: DeleteFormInput & { creatorId: string }
+) {
+  return prisma.form.delete({
+    where: {
+      formId: data.formId,
+      creatorId: data.creatorId,
+    },
   });
 }

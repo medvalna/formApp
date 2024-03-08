@@ -1,6 +1,7 @@
 ﻿import { FastifyInstance } from "fastify";
 import {
   createFormHandler,
+  deleteFormHandler,
   getFormsHandler,
   updateFormsHandler,
 } from "./forms.controller";
@@ -43,6 +44,16 @@ async function formRoutes(server: FastifyInstance) {
       },
     },
     updateFormsHandler
+  );
+  server.delete(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("deleteFormSchema"),
+      },
+    },
+    deleteFormHandler
   );
 }
 export default formRoutes;
