@@ -7,7 +7,7 @@ async function choiceRoutes(server: FastifyInstance) {
     {
       preHandler: [server.authenticate],
       schema: {
-        body: $ref("createSingleChoiceSchema"),
+        body: $ref("createChoiceSchema"),
         response: {
           201: $ref("choiceResponseSchema"),
         },

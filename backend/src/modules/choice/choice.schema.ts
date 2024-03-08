@@ -1,32 +1,32 @@
 ﻿import { z } from "zod";
 import { buildJsonSchemas } from "fastify-zod";
 
-const singleChoiceInput = {
+const choiceInput = {
   relatedAnswerId: z.string(),
   relatedQuestionId: z.string(),
-  relatedOptionId: z.string().optional(),
-  //input: z.string().optional(),
+  options: z.string().array().optional(),
+  input: z.string().optional(),
 };
 
 const choiceGenerated = {
   choiceId: z.string(),
 };
 
-const createSingleChoiceSchema = z.object({
-  ...singleChoiceInput,
+const createChoiceSchema = z.object({
+  ...choiceInput,
 });
 const choiceResponseSchema = z.object({
-  ...singleChoiceInput,
+  ...choiceInput,
   ...choiceGenerated,
 });
 
 const choicesResponseSchema = z.array(choiceResponseSchema);
 
-export type CreateSingleChoiceInput = z.infer<typeof createSingleChoiceSchema>;
+export type CreateSingleChoiceInput = z.infer<typeof createChoiceSchema>;
 
 export const { schemas: choiceSchemas, $ref } = buildJsonSchemas(
   {
-    createSingleChoiceSchema: createSingleChoiceSchema,
+    createChoiceSchema: createChoiceSchema,
     choiceResponseSchema,
     choicesResponseSchema,
   },
