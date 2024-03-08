@@ -1,7 +1,7 @@
 ﻿import prisma from "../../utils/prisma";
-import { CreateChoiceInput } from "./choice.schema";
+import { CreateSingleChoiceInput } from "./choice.schema";
 
-export async function createChoice(data: CreateChoiceInput) {
+export async function createSingleChoice(data: CreateSingleChoiceInput) {
   return prisma.choice.create({
     data,
   });

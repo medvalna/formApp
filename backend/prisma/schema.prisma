@@ -55,7 +55,7 @@ optionId String @id @default(uuid())
 text String
 relatedQuestion Questions @relation(fields: [relatedQuestionId], references: [questionId])
 relatedQuestionId String
-relatedChoice Choice[]
+choice ChoicesOnOptions[]
 }
 
 model Answer {
@@ -73,7 +73,14 @@ model Choice {
     relatedAnswerId String
     relatedQuestion Questions @relation(fields: [relatedQuestionId], references: [questionId])
     relatedQuestionId String
-    relatedOption Options? @relation(fields: [relatedOptionId], references: [optionId])
-    relatedOptionId String?
+    options ChoicesOnOptions[]
     input String?
+}
+
+model ChoicesOnOptions{
+    choice Choice @relation(fields: [choiceId], references: [choiceId])
+    choiceId String
+    option Options @relation(fields: [optionId], references: [optionId])
+    optionId String
+    @@id([choiceId, optionId])
 }

@@ -1,11 +1,11 @@
 ﻿import { FastifyRequest } from "fastify";
-import { createChoice } from "./choice.service";
-import { CreateChoiceInput } from "./choice.schema";
+import { createSingleChoice } from "./choice.service";
+import { CreateSingleChoiceInput } from "./choice.schema";
 
-export async function createChoiceHandler(
-  request: FastifyRequest<{ Body: CreateChoiceInput }>
+export async function createSingleChoiceHandler(
+  request: FastifyRequest<{ Body: CreateSingleChoiceInput }>
 ) {
-  const choice = await createChoice({
+  const choice = await createSingleChoice({
     ...request.body,
   });
   return choice;
