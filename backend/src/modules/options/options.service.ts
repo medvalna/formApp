@@ -29,3 +29,10 @@ export async function editOptions(data: EditOptionInput) {
     },
   });
 }
+export async function deleteOptions(data: DeleteOption) {
+  return prisma.options.delete({
+    where: {
+      optionId: data.optionId,
+    },
+  });
+}

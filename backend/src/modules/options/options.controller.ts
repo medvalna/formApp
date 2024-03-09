@@ -4,7 +4,12 @@ import {
   EditOptionInput,
   GetOptionsInput,
 } from "./options.schema";
-import { createOption, editOptions, getOptions } from "./options.service";
+import {
+  createOption,
+  deleteOptions,
+  editOptions,
+  getOptions,
+} from "./options.service";
 export async function createOptionHandler(
   request: FastifyRequest<{ Body: CreateOptionInput }>
 ) {
@@ -30,6 +35,15 @@ export async function editOptionsHandler(
   reply: FastifyReply
 ) {
   await editOptions({
+    ...request.body,
+  });
+  return reply.send({ ok: true });
+}
+export async function deleteOptionsHandler(
+  request: FastifyRequest<{ Body: EditOptionInput }>,
+  reply: FastifyReply
+) {
+  await deleteOptions({
     ...request.body,
   });
   return reply.send({ ok: true });

@@ -32,10 +32,13 @@ const editOptionInputSchema = z.object({
   optionId: z.string(),
   text: z.string(),
 });
-
+const deleteOptionSchema = z.object({
+  ...optionGenerated,
+});
 export type CreateOptionInput = z.infer<typeof createOptionSchema>;
 export type GetOptionsInput = z.infer<typeof getOptionsSchema>;
 export type EditOptionInput = z.infer<typeof editOptionInputSchema>;
+export type DeleteOption = z.infer<typeof deleteOptionSchema>;
 export const { schemas: optionSchemas, $ref } = buildJsonSchemas(
   {
     createOptionSchema,
@@ -45,6 +48,7 @@ export const { schemas: optionSchemas, $ref } = buildJsonSchemas(
     getOptionResponseSchema,
     getOptionsResponseSchema,
     editOptionInputSchema,
+    deleteOptionSchema,
   },
   { $id: "optionSchema" }
 );

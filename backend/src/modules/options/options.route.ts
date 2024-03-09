@@ -1,6 +1,7 @@
 ﻿import { FastifyInstance } from "fastify";
 import {
   createOptionHandler,
+  deleteOptionsHandler,
   editOptionsHandler,
   getOptionsHandler,
 } from "./options.controller";
@@ -39,6 +40,16 @@ async function optionRoutes(server: FastifyInstance) {
       },
     },
     editOptionsHandler
+  );
+  server.delete(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("deleteOptionSchema"),
+      },
+    },
+    deleteOptionsHandler
   );
 }
 
