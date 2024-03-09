@@ -25,6 +25,7 @@ const getChoiceSchema = z.object({
   answerId: z.string(),
 });
 const getChoiceResponseSchema = z.object({
+  choiceId: z.string(),
   relatedQuestionId: z.string(),
   options: z
     .object({
@@ -38,8 +39,12 @@ const getChoiceResponseSchema = z.object({
   input: z.string().optional(),
 });
 const getChoicesResponseSchema = z.array(getChoiceResponseSchema);
+const deleteChoiceSchema = z.object({
+  choiceId: z.string(),
+});
 export type CreateSingleChoiceInput = z.infer<typeof createChoiceSchema>;
 export type GetChoice = z.infer<typeof getChoiceSchema>;
+export type DeleteChoice = z.infer<typeof deleteChoiceSchema>;
 export const { schemas: choiceSchemas, $ref } = buildJsonSchemas(
   {
     createChoiceSchema: createChoiceSchema,
@@ -48,6 +53,7 @@ export const { schemas: choiceSchemas, $ref } = buildJsonSchemas(
     getChoiceResponseSchema,
     getChoicesResponseSchema,
     getChoiceSchema,
+    deleteChoiceSchema,
   },
   { $id: "choiceSchema" }
 );

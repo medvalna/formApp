@@ -1,5 +1,5 @@
 ﻿import prisma from "../../utils/prisma";
-import { CreateSingleChoiceInput } from "./choice.schema";
+import { CreateSingleChoiceInput, DeleteChoice } from "./choice.schema";
 
 export async function createSingleChoice(data: CreateSingleChoiceInput) {
   const options = [];
@@ -29,6 +29,7 @@ export async function getChoice(data: { relatedAnswerId: string }) {
       relatedAnswerId: data.relatedAnswerId,
     },
     select: {
+      choiceId: true,
       relatedQuestionId: true,
       options: {
         select: {
@@ -41,6 +42,14 @@ export async function getChoice(data: { relatedAnswerId: string }) {
         },
       },
       input: true,
+    },
+  });
+}
+
+export async function deleteChoice(data: DeleteChoice) {
+  return prisma.choice.deleteMany({
+    where: {
+      choiceId: data.choiceId,
     },
   });
 }

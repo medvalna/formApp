@@ -1,6 +1,10 @@
 ﻿import { FastifyReply, FastifyRequest } from "fastify";
-import { createSingleChoice, getChoice } from "./choice.service";
-import { CreateSingleChoiceInput, GetChoice } from "./choice.schema";
+import { createSingleChoice, deleteChoice, getChoice } from "./choice.service";
+import {
+  CreateSingleChoiceInput,
+  DeleteChoice,
+  GetChoice,
+} from "./choice.schema";
 
 export async function createSingleChoiceHandler(
   request: FastifyRequest<{ Body: CreateSingleChoiceInput }>
@@ -19,4 +23,12 @@ export async function getChoicesHandler(
   return await getChoice({
     relatedAnswerId: answerId,
   });
+}
+
+export async function deleteChoiceHandler(
+  request: FastifyRequest<{ Body: DeleteChoice }>,
+  reply: FastifyReply
+) {
+  await deleteChoice({ ...request.body });
+  return reply.send({ ok: true });
 }

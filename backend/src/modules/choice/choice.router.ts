@@ -1,6 +1,7 @@
 ﻿import { FastifyInstance } from "fastify";
 import {
   createSingleChoiceHandler,
+  deleteChoiceHandler,
   getChoicesHandler,
 } from "./choice.controller";
 import { $ref } from "./choice.schema";
@@ -27,6 +28,16 @@ async function choiceRoutes(server: FastifyInstance) {
       },
     },
     getChoicesHandler
+  );
+  server.delete(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("deleteChoiceSchema"),
+      },
+    },
+    deleteChoiceHandler
   );
 }
 export default choiceRoutes;
