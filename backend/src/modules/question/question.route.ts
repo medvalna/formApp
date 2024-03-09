@@ -1,5 +1,8 @@
 ﻿import { FastifyInstance } from "fastify";
-import { createQuestionHandler } from "./question.controller";
+import {
+  createQuestionHandler,
+  editQuestionHandler,
+} from "./question.controller";
 import { $ref } from "./question.schema";
 async function questionRoutes(server: FastifyInstance) {
   server.post(
@@ -14,6 +17,16 @@ async function questionRoutes(server: FastifyInstance) {
       },
     },
     createQuestionHandler
+  );
+  server.patch(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("editQuestionSchema"),
+      },
+    },
+    editQuestionHandler
   );
 }
 export default questionRoutes;

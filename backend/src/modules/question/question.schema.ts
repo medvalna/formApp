@@ -6,10 +6,6 @@ const questionInput = {
   title: z.string(),
   type: z.nativeEnum(Type),
   isRequired: z.boolean(),
-  // options: z.object({
-  //   optionId: z.string(),
-  //   text: z.string(),
-  // }),
   relatedFormId: z.string(),
 };
 
@@ -24,14 +20,24 @@ const questionResponseSchema = z.object({
   ...questionInput,
   ...questionGenerated,
 });
+
+const editQuestionSchema = z.object({
+  title: z.string(),
+  type: z.nativeEnum(Type),
+  isRequired: z.boolean(),
+  ...questionGenerated,
+});
+
 const questionsResponseSchema = z.array(questionResponseSchema);
 export type CreateQuestionInput = z.infer<typeof createQuestionSchema>;
+export type EditQuestionInput = z.infer<typeof editQuestionSchema>;
 
 export const { schemas: questionSchemas, $ref } = buildJsonSchemas(
   {
     createQuestionSchema,
     questionResponseSchema,
     questionsResponseSchema,
+    editQuestionSchema,
   },
   { $id: "questionSchema" }
 );

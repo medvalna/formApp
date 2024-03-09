@@ -1,6 +1,6 @@
 ﻿import prisma from "../../utils/prisma";
 
-import { CreateQuestionInput } from "./question.schema";
+import { CreateQuestionInput, EditQuestionInput } from "./question.schema";
 export async function createQuestion(
   data: CreateQuestionInput & { creatorId: string }
 ) {
@@ -11,6 +11,25 @@ export async function createQuestion(
       type: type,
       isRequired: isRequired,
       relatedFormId: relatedFormId,
+    },
+  });
+}
+
+export async function editQuestion(
+  data: EditQuestionInput & { creatorId: string }
+) {
+  const { title, type, isRequired, questionId, creatorId } = data;
+  return prisma.questions.update({
+    where: {
+      questionId: questionId,
+      relatedForm: {
+        creatorId: creatorId,
+      },
+    },
+    data: {
+      title: title,
+      type: type,
+      isRequired: isRequired,
     },
   });
 }
