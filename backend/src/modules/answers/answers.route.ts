@@ -1,5 +1,5 @@
 ﻿import { FastifyInstance } from "fastify";
-import { createAnswerHandler } from "./answers.controller";
+import { createAnswerHandler, getAnswersHandler } from "./answers.controller";
 import { $ref } from "./answers.schema";
 async function answerRoutes(server: FastifyInstance) {
   server.post(
@@ -14,6 +14,18 @@ async function answerRoutes(server: FastifyInstance) {
       },
     },
     createAnswerHandler
+  );
+  server.get(
+    "/:formId",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        response: {
+          201: $ref("getAnswersResponseSchema"),
+        },
+      },
+    },
+    getAnswersHandler
   );
 }
 export default answerRoutes;

@@ -18,14 +18,38 @@ const answerResponseSchema = z.object({
 });
 
 const answersResponseSchema = z.array(answerResponseSchema);
-
+const getAnswerSchema = z.object({
+  formId: z.string(),
+});
+const getAnswerResponseSchema = z.object({
+  responderId: z.string(),
+  answerId: z.string(),
+  choices: z
+    .object({
+      relatedQuestionId: z.string(),
+      options: z
+        .object({
+          option: z.object({
+            optionId: z.string(),
+            text: z.string(),
+          }),
+        })
+        .array(),
+    })
+    .array(),
+});
+const getAnswersResponseSchema = z.array(getAnswerResponseSchema);
 export type CreateAnswerInput = z.infer<typeof createAnswerSchema>;
+export type GetAnswerInput = z.infer<typeof getAnswerSchema>;
 
 export const { schemas: answerSchemas, $ref } = buildJsonSchemas(
   {
     createAnswerSchema,
     answerResponseSchema,
     answersResponseSchema,
+    getAnswerResponseSchema,
+    getAnswersResponseSchema,
+    getAnswerSchema,
   },
   { $id: "answerSchema" }
 );

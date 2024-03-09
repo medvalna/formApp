@@ -8,3 +8,34 @@ export async function createAnswer(
     data,
   });
 }
+export async function getAnswers(data: {
+  responderId: string;
+  formId: string;
+}) {
+  return prisma.answer.findMany({
+    where: {
+      relatedFormId: data.formId,
+    },
+    select: {
+      answerId: true,
+      responderId: true,
+      choices: {
+        select: {
+          relatedQuestionId: true,
+          options: {
+            select: {
+              option: {
+                select: {
+                  optionId: true,
+                  text: true,
+                },
+              },
+            },
+          },
+          input: true,
+          choiceId: true,
+        },
+      },
+    },
+  });
+}

@@ -1,5 +1,9 @@
 ﻿import prisma from "../../utils/prisma";
-import { CreateOptionInput, EditOptionInput } from "./options.schema";
+import {
+  CreateOptionInput,
+  DeleteOption,
+  EditOptionInput,
+} from "./options.schema";
 
 export async function createOption(data: CreateOptionInput) {
   return prisma.options.create({
