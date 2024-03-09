@@ -28,8 +28,14 @@ const getOptionResponseSchema = z.object({
 const getOptionsResponseSchema = z.array(getOptionResponseSchema);
 const optionsResponseSchema = z.array(optionResponseSchema);
 
+const editOptionInputSchema = z.object({
+  optionId: z.string(),
+  text: z.string(),
+});
+
 export type CreateOptionInput = z.infer<typeof createOptionSchema>;
 export type GetOptionsInput = z.infer<typeof getOptionsSchema>;
+export type EditOptionInput = z.infer<typeof editOptionInputSchema>;
 export const { schemas: optionSchemas, $ref } = buildJsonSchemas(
   {
     createOptionSchema,
@@ -38,6 +44,7 @@ export const { schemas: optionSchemas, $ref } = buildJsonSchemas(
     getOptionsSchema,
     getOptionResponseSchema,
     getOptionsResponseSchema,
+    editOptionInputSchema,
   },
   { $id: "optionSchema" }
 );

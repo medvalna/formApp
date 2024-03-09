@@ -1,6 +1,10 @@
-﻿import { FastifyRequest } from "fastify";
-import { CreateOptionInput, GetOptionsInput } from "./options.schema";
-import { createOption, getOptions } from "./options.service";
+﻿import { FastifyReply, FastifyRequest } from "fastify";
+import {
+  CreateOptionInput,
+  EditOptionInput,
+  GetOptionsInput,
+} from "./options.schema";
+import { createOption, editOptions, getOptions } from "./options.service";
 export async function createOptionHandler(
   request: FastifyRequest<{ Body: CreateOptionInput }>
 ) {
@@ -19,4 +23,14 @@ export async function getOptionsHandler(
     relatedQuestionId: questionId,
   });
   return options;
+}
+
+export async function editOptionsHandler(
+  request: FastifyRequest<{ Body: EditOptionInput }>,
+  reply: FastifyReply
+) {
+  await editOptions({
+    ...request.body,
+  });
+  return reply.send({ ok: true });
 }

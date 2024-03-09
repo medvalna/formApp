@@ -1,5 +1,9 @@
 ﻿import { FastifyInstance } from "fastify";
-import { createOptionHandler, getOptionsHandler } from "./options.controller";
+import {
+  createOptionHandler,
+  editOptionsHandler,
+  getOptionsHandler,
+} from "./options.controller";
 import { $ref } from "./options.schema";
 async function optionRoutes(server: FastifyInstance) {
   server.post(
@@ -25,6 +29,16 @@ async function optionRoutes(server: FastifyInstance) {
       },
     },
     getOptionsHandler
+  );
+  server.patch(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("editOptionInputSchema"),
+      },
+    },
+    editOptionsHandler
   );
 }
 

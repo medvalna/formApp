@@ -1,5 +1,5 @@
 ﻿import prisma from "../../utils/prisma";
-import { CreateOptionInput } from "./options.schema";
+import { CreateOptionInput, EditOptionInput } from "./options.schema";
 
 export async function createOption(data: CreateOptionInput) {
   return prisma.options.create({
@@ -8,7 +8,6 @@ export async function createOption(data: CreateOptionInput) {
 }
 
 export async function getOptions(data: { relatedQuestionId: string }) {
-  console.log("rel", data.relatedQuestionId);
   return prisma.options.findMany({
     where: {
       relatedQuestionId: data.relatedQuestionId,
@@ -16,6 +15,17 @@ export async function getOptions(data: { relatedQuestionId: string }) {
     select: {
       text: true,
       optionId: true,
+    },
+  });
+}
+
+export async function editOptions(data: EditOptionInput) {
+  return prisma.options.update({
+    where: {
+      optionId: data.optionId,
+    },
+    data: {
+      text: data.text,
     },
   });
 }
