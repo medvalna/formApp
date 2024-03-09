@@ -42,6 +42,16 @@ export async function editQuestion(
 export async function deleteQuestion(
   data: DeleteQuestionInput & { creatorId: string }
 ) {
+  await prisma.options.deleteMany({
+    where: {
+      relatedQuestionId: data.questionId,
+      relatedQuestion: {
+        relatedForm: {
+          creatorId: data.creatorId,
+        },
+      },
+    },
+  });
   return prisma.questions.delete({
     where: {
       questionId: data.questionId,

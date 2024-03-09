@@ -49,6 +49,5 @@ export async function getQuestionsHandler(
     creatorId: request.user.userId,
     relatedFormId: formId,
   });
-  console.log(questions);
   return questions;
 }

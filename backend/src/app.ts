@@ -91,7 +91,7 @@ async function main() {
   server.register(swaggerUi, swaggerUiOptions);
   server.register(userRoutes, { prefix: "api/users" });
   server.register(formRoutes, { prefix: "api/forms" });
-  server.register(questionRoutes, { prefix: "api/forms/:formId/questions" });
+  server.register(questionRoutes, { prefix: "api/questions" });
   server.register(optionRoutes, { prefix: "api/options" });
   server.register(answerRoutes, { prefix: "api/answers" });
   server.register(choiceRoutes, { prefix: "api/choice" });

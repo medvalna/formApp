@@ -41,7 +41,7 @@ async function questionRoutes(server: FastifyInstance) {
     deleteQuestionHandler
   );
   server.get(
-    "/",
+    "/:formId",
     {
       preHandler: [server.authenticate],
       schema: {
