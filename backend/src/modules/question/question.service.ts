@@ -1,6 +1,10 @@
 ﻿import prisma from "../../utils/prisma";
 
-import { CreateQuestionInput, EditQuestionInput } from "./question.schema";
+import {
+  CreateQuestionInput,
+  DeleteQuestionInput,
+  EditQuestionInput,
+} from "./question.schema";
 export async function createQuestion(
   data: CreateQuestionInput & { creatorId: string }
 ) {
@@ -30,6 +34,19 @@ export async function editQuestion(
       title: title,
       type: type,
       isRequired: isRequired,
+    },
+  });
+}
+
+export async function deleteQuestion(
+  data: DeleteQuestionInput & { creatorId: string }
+) {
+  return prisma.questions.delete({
+    where: {
+      questionId: data.questionId,
+      relatedForm: {
+        creatorId: data.creatorId,
+      },
     },
   });
 }

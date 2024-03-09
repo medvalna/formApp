@@ -27,17 +27,20 @@ const editQuestionSchema = z.object({
   isRequired: z.boolean(),
   ...questionGenerated,
 });
-
+const deleteQuestionSchema = z.object({
+  ...questionGenerated,
+});
 const questionsResponseSchema = z.array(questionResponseSchema);
 export type CreateQuestionInput = z.infer<typeof createQuestionSchema>;
 export type EditQuestionInput = z.infer<typeof editQuestionSchema>;
-
+export type DeleteQuestionInput = z.infer<typeof deleteQuestionSchema>;
 export const { schemas: questionSchemas, $ref } = buildJsonSchemas(
   {
     createQuestionSchema,
     questionResponseSchema,
     questionsResponseSchema,
     editQuestionSchema,
+    deleteQuestionSchema,
   },
   { $id: "questionSchema" }
 );

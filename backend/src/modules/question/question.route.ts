@@ -1,6 +1,7 @@
 ﻿import { FastifyInstance } from "fastify";
 import {
   createQuestionHandler,
+  deleteQuestionHandler,
   editQuestionHandler,
 } from "./question.controller";
 import { $ref } from "./question.schema";
@@ -27,6 +28,16 @@ async function questionRoutes(server: FastifyInstance) {
       },
     },
     editQuestionHandler
+  );
+  server.delete(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("deleteQuestionSchema"),
+      },
+    },
+    deleteQuestionHandler
   );
 }
 export default questionRoutes;

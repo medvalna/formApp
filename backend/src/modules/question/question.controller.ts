@@ -1,5 +1,9 @@
 ﻿import { FastifyReply, FastifyRequest } from "fastify";
-import { createQuestion, editQuestion } from "./question.service";
+import {
+  createQuestion,
+  deleteQuestion,
+  editQuestion,
+} from "./question.service";
 import { CreateQuestionInput, EditQuestionInput } from "./question.schema";
 
 export async function createQuestionHandler(
@@ -17,6 +21,16 @@ export async function editQuestionHandler(
   reply: FastifyReply
 ) {
   await editQuestion({
+    ...request.body,
+    creatorId: request.user.userId,
+  });
+  return reply.send({ ok: true });
+}
+export async function deleteQuestionHandler(
+  request: FastifyRequest<{ Body: EditQuestionInput }>,
+  reply: FastifyReply
+) {
+  await deleteQuestion({
     ...request.body,
     creatorId: request.user.userId,
   });
