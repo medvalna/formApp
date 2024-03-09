@@ -10,7 +10,7 @@ export async function registerUserHandler(
   reply: FastifyReply
 ) {
   const body = request.body;
-  console.log(body);
+  //console.log(body);
   try {
     const user = await createUser(body);
     return reply.code(201).send(user);

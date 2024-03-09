@@ -84,7 +84,7 @@ async function main() {
     ...choiceSchemas,
   ]) {
     server.addSchema(schema);
-    console.log(schema);
+    //console.log(schema);
   }
 
   server.register(swagger, swaggerOptions);

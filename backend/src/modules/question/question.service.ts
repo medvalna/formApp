@@ -4,7 +4,6 @@ import {
   CreateQuestionInput,
   DeleteQuestionInput,
   EditQuestionInput,
-  GetQuestions,
 } from "./question.schema";
 export async function createQuestion(
   data: CreateQuestionInput & { creatorId: string }
@@ -42,6 +41,7 @@ export async function editQuestion(
 export async function deleteQuestion(
   data: DeleteQuestionInput & { creatorId: string }
 ) {
+  //delete all connected options
   await prisma.options.deleteMany({
     where: {
       relatedQuestionId: data.questionId,
@@ -62,11 +62,10 @@ export async function deleteQuestion(
   });
 }
 
-export async function getQuestions(data: /*GetQuestions &*/ {
+export async function getQuestions(data: {
   creatorId: string;
   relatedFormId: string;
 }) {
-  console.log("related", data.relatedFormId);
   return prisma.questions.findMany({
     where: {
       relatedFormId: data.relatedFormId,
