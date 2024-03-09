@@ -3,6 +3,7 @@ import {
   createQuestionHandler,
   deleteQuestionHandler,
   editQuestionHandler,
+  getQuestionsHandler,
 } from "./question.controller";
 import { $ref } from "./question.schema";
 async function questionRoutes(server: FastifyInstance) {
@@ -38,6 +39,18 @@ async function questionRoutes(server: FastifyInstance) {
       },
     },
     deleteQuestionHandler
+  );
+  server.get(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        response: {
+          200: $ref("getQuestionsResponseSchema"),
+        },
+      },
+    },
+    getQuestionsHandler
   );
 }
 export default questionRoutes;

@@ -4,6 +4,7 @@ import {
   CreateQuestionInput,
   DeleteQuestionInput,
   EditQuestionInput,
+  GetQuestions,
 } from "./question.schema";
 export async function createQuestion(
   data: CreateQuestionInput & { creatorId: string }
@@ -46,6 +47,33 @@ export async function deleteQuestion(
       questionId: data.questionId,
       relatedForm: {
         creatorId: data.creatorId,
+      },
+    },
+  });
+}
+
+export async function getQuestions(data: /*GetQuestions &*/ {
+  creatorId: string;
+  relatedFormId: string;
+}) {
+  console.log("related", data.relatedFormId);
+  return prisma.questions.findMany({
+    where: {
+      relatedFormId: data.relatedFormId,
+      relatedForm: {
+        creatorId: data.creatorId,
+      },
+    },
+    select: {
+      questionId: true,
+      title: true,
+      type: true,
+      isRequired: true,
+      options: {
+        select: {
+          optionId: true,
+          text: true,
+        },
       },
     },
   });

@@ -3,8 +3,13 @@ import {
   createQuestion,
   deleteQuestion,
   editQuestion,
+  getQuestions,
 } from "./question.service";
-import { CreateQuestionInput, EditQuestionInput } from "./question.schema";
+import {
+  CreateQuestionInput,
+  EditQuestionInput,
+  GetQuestions,
+} from "./question.schema";
 
 export async function createQuestionHandler(
   request: FastifyRequest<{ Body: CreateQuestionInput }>
@@ -35,4 +40,15 @@ export async function deleteQuestionHandler(
     creatorId: request.user.userId,
   });
   return reply.send({ ok: true });
+}
+export async function getQuestionsHandler(
+  request: FastifyRequest<{ Params: GetQuestions }>
+) {
+  const formId = request.params.formId;
+  const questions = await getQuestions({
+    creatorId: request.user.userId,
+    relatedFormId: formId,
+  });
+  console.log(questions);
+  return questions;
 }
