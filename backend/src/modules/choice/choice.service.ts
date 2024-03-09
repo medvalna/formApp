@@ -22,3 +22,25 @@ export async function createSingleChoice(data: CreateSingleChoiceInput) {
     },
   });
 }
+
+export async function getChoice(data: { relatedAnswerId: string }) {
+  return prisma.choice.findMany({
+    where: {
+      relatedAnswerId: data.relatedAnswerId,
+    },
+    select: {
+      relatedQuestionId: true,
+      options: {
+        select: {
+          option: {
+            select: {
+              optionId: true,
+              text: true,
+            },
+          },
+        },
+      },
+      input: true,
+    },
+  });
+}

@@ -1,5 +1,8 @@
 ﻿import { FastifyInstance } from "fastify";
-import { createSingleChoiceHandler } from "./choice.controller";
+import {
+  createSingleChoiceHandler,
+  getChoicesHandler,
+} from "./choice.controller";
 import { $ref } from "./choice.schema";
 async function choiceRoutes(server: FastifyInstance) {
   server.post(
@@ -14,6 +17,16 @@ async function choiceRoutes(server: FastifyInstance) {
       },
     },
     createSingleChoiceHandler
+  );
+  server.get(
+    "/:answerId",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        response: { 201: $ref("getChoicesResponseSchema") },
+      },
+    },
+    getChoicesHandler
   );
 }
 export default choiceRoutes;
