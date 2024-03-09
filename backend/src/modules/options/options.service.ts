@@ -6,3 +6,16 @@ export async function createOption(data: CreateOptionInput) {
     data,
   });
 }
+
+export async function getOptions(data: { relatedQuestionId: string }) {
+  console.log("rel", data.relatedQuestionId);
+  return prisma.options.findMany({
+    where: {
+      relatedQuestionId: data.relatedQuestionId,
+    },
+    select: {
+      text: true,
+      optionId: true,
+    },
+  });
+}

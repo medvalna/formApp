@@ -1,5 +1,5 @@
 ﻿import { FastifyInstance } from "fastify";
-import { createOptionHandler } from "./options.controller";
+import { createOptionHandler, getOptionsHandler } from "./options.controller";
 import { $ref } from "./options.schema";
 async function optionRoutes(server: FastifyInstance) {
   server.post(
@@ -13,6 +13,18 @@ async function optionRoutes(server: FastifyInstance) {
       },
     },
     createOptionHandler
+  );
+  server.get(
+    "/:questionId",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        response: {
+          200: $ref("getOptionsResponseSchema"),
+        },
+      },
+    },
+    getOptionsHandler
   );
 }
 
