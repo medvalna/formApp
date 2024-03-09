@@ -1,5 +1,9 @@
 ﻿import { FastifyInstance } from "fastify";
-import { createAnswerHandler, getAnswersHandler } from "./answers.controller";
+import {
+  createAnswerHandler,
+  deleteAnswerHandler,
+  getAnswersHandler,
+} from "./answers.controller";
 import { $ref } from "./answers.schema";
 async function answerRoutes(server: FastifyInstance) {
   server.post(
@@ -26,6 +30,16 @@ async function answerRoutes(server: FastifyInstance) {
       },
     },
     getAnswersHandler
+  );
+  server.delete(
+    "/",
+    {
+      preHandler: [server.authenticate],
+      schema: {
+        body: $ref("deleteAnswerSchema"),
+      },
+    },
+    deleteAnswerHandler
   );
 }
 export default answerRoutes;

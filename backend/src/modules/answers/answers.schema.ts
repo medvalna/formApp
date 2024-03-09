@@ -38,10 +38,13 @@ const getAnswerResponseSchema = z.object({
     })
     .array(),
 });
+const deleteAnswerSchema = z.object({
+  answerId: z.string(),
+});
 const getAnswersResponseSchema = z.array(getAnswerResponseSchema);
 export type CreateAnswerInput = z.infer<typeof createAnswerSchema>;
 export type GetAnswerInput = z.infer<typeof getAnswerSchema>;
-
+export type DeleteAnswer = z.infer<typeof deleteAnswerSchema>;
 export const { schemas: answerSchemas, $ref } = buildJsonSchemas(
   {
     createAnswerSchema,
@@ -50,6 +53,7 @@ export const { schemas: answerSchemas, $ref } = buildJsonSchemas(
     getAnswerResponseSchema,
     getAnswersResponseSchema,
     getAnswerSchema,
+    deleteAnswerSchema,
   },
   { $id: "answerSchema" }
 );

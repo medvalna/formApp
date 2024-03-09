@@ -1,5 +1,5 @@
 ﻿import prisma from "../../utils/prisma";
-import { CreateAnswerInput } from "./answers.schema";
+import { CreateAnswerInput, DeleteAnswer } from "./answers.schema";
 
 export async function createAnswer(
   data: CreateAnswerInput & { responderId: string }
@@ -36,6 +36,28 @@ export async function getAnswers(data: {
           choiceId: true,
         },
       },
+    },
+  });
+}
+
+export async function deleteAnswer(
+  data: DeleteAnswer & { responderId: string }
+) {
+  await prisma.choicesOnOptions.deleteMany({
+    where: {
+      choice: {
+        relatedAnswerId: data.answerId,
+      },
+    },
+  });
+  await prisma.choice.deleteMany({
+    where: {
+      relatedAnswerId: data.answerId,
+    },
+  });
+  await prisma.answer.delete({
+    where: {
+      answerId: data.answerId,
     },
   });
 }
