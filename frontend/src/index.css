@@ -1,0 +1,58 @@
+:root {
+  font-family: "Plus Jakarta Sans", system-ui, Avenir, Helvetica, Arial,
+    "Nunito", sans-serif;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #f1f5ff;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+}
+button {
+  font-family: "Nunito";
+}
+h1 {
+  font-size: 76px;
+  line-height: 1.1;
+  color: #175cff;
+  margin: 0;
+  font-family: "Plus Jakarta Sans";
+}
+h2 {
+  font-size: 48px;
+  color: #175cff;
+  margin: 0;
+  margin-top: 5px;
+  font-family: "Plus Jakarta Sans";
+}
+h3 {
+  font-size: 20px;
+  color: #175cff;
+  margin: 0;
+  margin-top: 5px;
+  font-family: "Plus Jakarta Sans";
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Bold.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("assets/fonts/Nunito/Nunito/static/Nunito-Bold.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

@@ -1,0 +1,40 @@
+#root {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+.title {
+  position: absolute;
+  top: 226px;
+  left: 120px;
+  text-align: center;
+}
+.question {
+  text-align: center;
+  position: absolute;
+  top: 668px;
+}
+.cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.navbar {
+  position: absolute;
+  top: 34px;
+  right: 120px;
+}
+.button {
+  width: 137px;
+  height: 43px;
+  text-decoration-color: #175cff;
+  background-color: white;
+  border-radius: 10px;
+  border-color: transparent;
+}
+.button:hover {
+  background-color: #f1f5ff;
+}
+.button-text {
+  color: #175cff;
+}
