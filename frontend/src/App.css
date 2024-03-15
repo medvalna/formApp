@@ -1,12 +1,10 @@
-/* .cover_container {
-  float: right;
-  margin: 0px;
-  padding: 0;
-  position: relative;
-} */
 .cover {
   max-width: 100%;
   min-width: 300px;
+}
+.icon {
+  width: 150px;
+  height: 150px;
 }
 .layout {
   width: 100%;
@@ -55,7 +53,8 @@
   margin-right: 20%;
   margin-bottom: 20%;
   display: flex;
-
+  justify-content: center;
+  align-items: center;
   justify-content: center;
 }
 .points {
@@ -73,11 +72,18 @@ h4 {
 .pros {
   flex-direction: column;
 }
+.h3title {
+  margin-bottom: 30px;
+}
 @media (max-width: 1036px) {
   .container {
     display: block;
     margin: 300px 0;
     justify-content: center;
+  }
+  .icon {
+    width: 100px;
+    height: 100px;
   }
   .cover {
     display: none;
@@ -111,27 +117,14 @@ h4 {
     transform: translate(-50%, -50%);
     justify-content: center;
   }
-  /* .texts {
-    width: 100%;
-    overflow-y: auto;
-    justify-content: center;
-  } */
+
   .question-title {
     left: 50%;
-    /* transform: translate(-50%, -50%); */
     justify-content: center;
-  }
-  .pros {
-    /* left: 55%; */
-    /* width: 100%;
-    flex-direction: column;
-    justify-content: center; */
   }
   .points {
     margin-top: 10%;
     width: 100%;
-    /* position: absolute;
-    left: 8%; */
     display: inline-flex;
     flex-direction: column;
     justify-content: center;

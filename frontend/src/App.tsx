@@ -1,6 +1,9 @@
 import "./App.css";
 import Cover from "./assets/Cover.png";
 import Cover_mob from "./assets/Cover_mob.png";
+import IconPlus from "./assets/IconPlus.png";
+import IconMessage from "./assets/IconMessage.png";
+import IconFile from "./assets/IconFile.png";
 function App() {
   return (
     <>
@@ -22,21 +25,24 @@ function App() {
         <h2 className="question-title"> What Can You Do?</h2>
         <div className="points">
           <div className="pros">
-            <h3>Create form</h3>
+            <img src={IconPlus} className="icon" alt="Image" />
+            <h3 className="h3title">Create form</h3>
             <h4>
               Effortlessly create your new form with our powerful and intuitive
               form app
             </h4>
           </div>
           <div className="pros">
-            <h3>Answer on forms</h3>
+            <img src={IconMessage} className="icon" alt="Image" />
+            <h3 className="h3title">Answer on forms</h3>
             <h4>
               Discover insightful critiques and share your thoughts on diverse
               literary masterpieces effortlessly
             </h4>
           </div>
           <div className="pros">
-            <h3>See results</h3>
+            <img src={IconFile} className="icon" alt="Image" />
+            <h3 className="h3title">See results</h3>
             <h4>
               Easily visualize your form submission data with our built-in
               analytics tools
