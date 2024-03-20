@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 export function Landing() {
   const navigate = useNavigate();
   function handleSignIn() {
-    navigate("/signIn");
+    navigate("/sign-in");
   }
   function handleSignUp() {
-    navigate("/signUp");
+    navigate("/sign-up");
   }
   return (
     <>
