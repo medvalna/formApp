@@ -1,6 +1,6 @@
-﻿import "./SignUp.css";
+﻿import "../Login.css";
 import { TextField } from "@radix-ui/themes";
-import "../../index.css";
+import "../../../index.css";
 export function SignUp() {
   return (
     <>
