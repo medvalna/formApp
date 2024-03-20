@@ -34,6 +34,10 @@
   border-radius: 10px;
   border-color: transparent;
 }
+
+.button-text {
+  color: #175cff;
+}
 .button:hover {
   font-size: 18px;
   background-color: #f1f5ff;
@@ -41,6 +45,29 @@
   cursor: pointer;
 }
 .button-text {
+  color: #175cff;
+}
+
+.button-signUp {
+  margin: 20px;
+  position: relative;
+  left: 45%;
+  transition: all 0.5s;
+  width: 137px;
+  height: 43px;
+  background-color: #175cff;
+  border-radius: 10px;
+  border-color: transparent;
+}
+.button-signUp:hover {
+  font-size: 18px;
+  background-color: #f1f5ff;
+  cursor: pointer;
+}
+.button-text-signUp {
+  color: white;
+}
+.button-signUp:hover .button-text-signUp {
   color: #175cff;
 }
 .question-title {
@@ -101,6 +128,12 @@ h4 {
 
   .button {
     left: 50%;
+    transform: translate(-50%, -50%);
+    border-width: 2px;
+    border-color: #175cff;
+    transition: all 0.5s;
+  }
+  .button-signUp {
     transform: translate(-50%, -50%);
     border-width: 2px;
     border-color: #175cff;

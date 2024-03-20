@@ -4,7 +4,15 @@ import Cover_mob from "../../assets/Cover_mob.png";
 import IconPlus from "../../assets/IconPlus.png";
 import IconMessage from "../../assets/IconMessage.png";
 import IconFile from "../../assets/IconFile.png";
+import { useNavigate } from "react-router-dom";
 export function Landing() {
+  const navigate = useNavigate();
+  function handleSignIn() {
+    navigate("/signIn");
+  }
+  function handleSignUp() {
+    navigate("/signUp");
+  }
   return (
     <>
       <div className="box">
@@ -13,8 +21,8 @@ export function Landing() {
             <img src={Cover} className="cover" alt="Image" />
             <img src={Cover_mob} className="cover_mob" alt="Image" />
           </div>
-          <button className="button">
-            <span className="button-text">Login</span>
+          <button className="button" onClick={handleSignIn}>
+            <span className="button-text">Sign In</span>
           </button>
           <div className="title">
             <h1>Form App</h1>
@@ -49,6 +57,9 @@ export function Landing() {
             </h4>
           </div>
         </div>
+        <button className="button-signUp" onClick={handleSignUp}>
+          <span className="button-text-signUp">Sign Up</span>
+        </button>
       </div>
     </>
   );
