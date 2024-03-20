@@ -15,6 +15,7 @@ import answerRoutes from "./modules/answers/answers.route";
 import { answerSchemas } from "./modules/answers/answers.schema";
 import { choiceSchemas } from "./modules/choice/choice.schema";
 import choiceRoutes from "./modules/choice/choice.router";
+import cors from "@fastify/cors";
 const swaggerOptions = {
   swagger: {
     info: {
@@ -86,7 +87,7 @@ async function main() {
     server.addSchema(schema);
     //console.log(schema);
   }
-
+  server.register(cors, {});
   server.register(swagger, swaggerOptions);
   server.register(swaggerUi, swaggerUiOptions);
   server.register(userRoutes, { prefix: "api/users" });
