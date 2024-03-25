@@ -1,8 +1,8 @@
 ﻿import { FastifyReply, FastifyRequest } from "fastify";
 import { createUser, findUserByEmail } from "./user.service";
-import { CreateUserInput, LoginInput } from "./user.schema";
+import { CheckAuthInput, CreateUserInput, LoginInput } from "./user.schema";
 import { verifyPassword } from "../../utils/hash";
-import { server } from "../../app";
+import { jwt, server } from "../../app";
 export async function registerUserHandler(
   request: FastifyRequest<{
     Body: CreateUserInput;
@@ -41,4 +41,32 @@ export async function loginHandler(
   } else {
     return reply.code(404).send({ message: "Invalid password" });
   }
+}
+
+export async function checkAuthHandler(
+  request: FastifyRequest<{ Body: CheckAuthInput }>,
+  reply: FastifyReply
+) {
+  try {
+    const token = request.body.accessToken;
+    //console.log(token);
+    const decode = jwt.verify(token, "sasfaiofnaoisufhafnjwpof");
+    if (decode.userId) {
+      console.log(decode.userId);
+      return reply.code(201).send(true);
+    } else {
+      return reply.code(201).send(false);
+    }
+  } catch (e) {
+    console.log("error:", e);
+    return reply.code(201).send(false);
+  }
+
+  // try {
+  //   server.authenticate;
+  //   return reply.code(201).send(true);
+  // } catch (e) {
+  //   console.log(e);
+  //   return reply.code(201).send(false);
+  // }
 }

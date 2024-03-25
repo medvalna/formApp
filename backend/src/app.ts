@@ -42,7 +42,7 @@ const swaggerUiOptions = {
     },
   },
 };
-
+export const jwt = require("jsonwebtoken");
 export const server = Fastify();
 
 declare module "fastify" {
