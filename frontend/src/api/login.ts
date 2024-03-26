@@ -1,7 +1,7 @@
 ﻿import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { baseApiRequest } from "./baseApiRequest";
-import { UserRegister, UserReply } from "../types/user";
-import { saveAccessToken } from "../utils/login";
+import { CheckReply, UserCheck, UserRegister, UserReply } from "../types/user";
+import { getAccessToken, saveAccessToken } from "../utils/login";
 import { useNavigate } from "react-router-dom";
 export const useRegister = () => {
   const client = useQueryClient();
@@ -16,9 +16,16 @@ export const useRegister = () => {
       }),
     retry: false,
     onSuccess: (data: UserReply) => {
-      saveAccessToken(data.token);
+      saveAccessToken(data.accessToken);
+      console.log(data);
       client.invalidateQueries({ queryKey: ["checkAuth"] });
       navigate("/homepage");
     },
+    onError: (err: Error) => {
+      console.log(err);
+    },
+  });
+};
+
   });
 };
