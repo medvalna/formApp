@@ -21,6 +21,7 @@ const createUserResponseSchema = z.object({
     required_error: "UserId is required",
   }),
   ...userCore,
+  accessToken: z.string(),
 });
 
 const loginSchema = z.object({
