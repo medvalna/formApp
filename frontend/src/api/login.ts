@@ -27,5 +27,22 @@ export const useRegister = () => {
   });
 };
 
+export const checkAuth = () => {
+  return useMutation({
+    mutationFn: (data: UserCheck) =>
+      baseApiRequest<CheckReply>({
+        url: "/users/checkauth",
+        method: "POST",
+        data,
+      }),
+    retry: false,
+    onSuccess: (data: CheckReply) => {
+      console.log(data);
+      return data.check;
+    },
+    onError: (err: Error) => {
+      console.log(err);
+      return false;
+    },
   });
 };
