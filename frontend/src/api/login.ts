@@ -1,7 +1,7 @@
 ﻿import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { baseApiRequest } from "./baseApiRequest";
 import { CheckReply, UserCheck, UserRegister, UserReply } from "../types/user";
-import { getAccessToken, saveAccessToken } from "../utils/login";
+import { saveAccessToken } from "../utils/login";
 import { useNavigate } from "react-router-dom";
 export const useRegister = () => {
   const client = useQueryClient();
